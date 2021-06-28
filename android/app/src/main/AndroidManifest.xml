@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_clean_instargram">
+    package="com.example.flutter_clean_instagram">
    <application
-        android:label="flutter_clean_instargram"
+        android:label="flutter_clean_instagram"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
