@@ -19,15 +19,15 @@ class HomePage extends GetView {
         actions: [
           ActionIconButton(
             onPressed: () {},
-            icon: Icon(Icons.add_box_outlined),
+            icon: Icons.add_box_outlined,
           ),
           ActionIconButton(
             onPressed: () {},
-            icon: Icon(CupertinoIcons.heart),
+            icon: CupertinoIcons.heart,
           ),
           ActionIconButton(
             onPressed: () {},
-            icon: Icon(Icons.send_sharp),
+            icon: Icons.send_sharp,
           ),
         ],
         backgroundColor: mainColor,

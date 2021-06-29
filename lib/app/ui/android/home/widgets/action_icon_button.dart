@@ -2,16 +2,26 @@ import 'package:flutter/material.dart';
 
 class ActionIconButton extends StatelessWidget {
   final Function onPressed;
-  final Icon icon;
-  const ActionIconButton({this.onPressed, this.icon});
+  final IconData icon;
+  final EdgeInsets padding;
+  const ActionIconButton({
+    this.onPressed,
+    this.icon,
+    this.padding = const EdgeInsets.only(right: 10, left: 10),
+  });
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      padding: EdgeInsets.all(0),
-      onPressed: onPressed,
-      icon: icon,
-      color: Colors.black,
+    return InkWell(
+      onTap: onPressed,
+      child: Padding(
+        padding: padding,
+        child: Icon(
+          icon,
+          color: Colors.black,
+          size: 26,
+        ),
+      ),
     );
   }
 }
