@@ -1,8 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_instagram/app/ui/android/home/widgets/action_icon_button.dart';
 import 'package:flutter_clean_instagram/app/ui/android/home/widgets/animation_Icon_button.dart';
+import 'package:readmore/readmore.dart';
 
 class StoryCard extends StatefulWidget {
   @override
@@ -29,8 +31,8 @@ class _StoryCardState extends State<StoryCard>
       padding: EdgeInsets.only(
         bottom: 20,
       ),
-      height: 350,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
             height: 40,
@@ -152,7 +154,69 @@ class _StoryCardState extends State<StoryCard>
                 onTap: () {},
               )
             ],
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '좋아요 320개',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                ReadMoreText(
+                  'Junewoo Park 내용내용내용내용내용내용내용내용내내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내내용내용용내용내용내',
+                  style: TextStyle(color: Colors.black),
+                  textAlign: TextAlign.start,
+                  colorClickableText: Colors.black,
+                  trimCollapsedText: '더보기',
+                  trimExpandedText: 's',
+                  trimLines: 2,
+                  trimMode: TrimMode.Length,
+                  trimLength: 50,
+                  moreStyle: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5, bottom: 5),
+                  child: InkWell(
+                    onTap: () {},
+                    child: Text(
+                      '댓글 350개 모두 보기',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 12,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: InkWell(
+                        onTap: () {},
+                        child: Text(
+                          '댓글 달기...',
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );
