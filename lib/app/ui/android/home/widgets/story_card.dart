@@ -15,14 +15,10 @@ class _StoryCardState extends State<StoryCard>
     with SingleTickerProviderStateMixin {
   int currentPage = 0;
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+  onPageChanged(index, reason) {
+    setState(() {
+      currentPage = index;
+    });
   }
 
   @override
@@ -54,7 +50,10 @@ class _StoryCardState extends State<StoryCard>
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
-                  child: Icon(Icons.more_vert),
+                  child: InkWell(
+                    child: Icon(Icons.more_vert),
+                    onTap: () {},
+                  ),
                 )
               ],
             ),
@@ -65,13 +64,10 @@ class _StoryCardState extends State<StoryCard>
               children: [
                 CarouselSlider.builder(
                   options: CarouselOptions(
-                      viewportFraction: 1,
-                      height: 230.0,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          currentPage = index;
-                        });
-                      }),
+                    viewportFraction: 1,
+                    height: 230.0,
+                    onPageChanged: onPageChanged,
+                  ),
                   itemCount: 3,
                   itemBuilder: (context, index, realIndex) {
                     return Container(
@@ -108,115 +104,134 @@ class _StoryCardState extends State<StoryCard>
               ],
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                children: [
-                  AnimationIconButton(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
-                    unSelectedIcon: Icon(
-                      CupertinoIcons.heart,
-                      size: 28,
-                    ),
-                    selectedIcon: Icon(
-                      CupertinoIcons.heart_fill,
-                      size: 28,
-                      color: Colors.red,
-                    ),
-                    onTap: () {},
-                  ),
-                  ActionIconButton(
-                    icon: CupertinoIcons.chat_bubble,
-                    onPressed: () {},
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
-                  ),
-                  ActionIconButton(
-                    icon: Icons.send_rounded,
-                    onPressed: () {},
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
-                  ),
-                ],
+          CardActionIcons(),
+          CardBottomTexts(),
+        ],
+      ),
+    );
+  }
+}
+
+class CardActionIcons extends StatelessWidget {
+  const CardActionIcons({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Row(
+          children: [
+            AnimationIconButton(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
+              unSelectedIcon: Icon(
+                CupertinoIcons.heart,
+                size: 28,
               ),
-              AnimationIconButton(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
-                unSelectedIcon: Icon(
-                  Icons.bookmark_outline,
-                  size: 28,
-                ),
-                selectedIcon: Icon(
-                  Icons.bookmark,
-                  size: 28,
-                ),
-                onTap: () {},
-              )
-            ],
+              selectedIcon: Icon(
+                CupertinoIcons.heart_fill,
+                size: 28,
+                color: Colors.red,
+              ),
+              onTap: () {},
+            ),
+            ActionIconButton(
+              icon: CupertinoIcons.chat_bubble,
+              onPressed: () {},
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
+            ),
+            ActionIconButton(
+              icon: Icons.send_rounded,
+              onPressed: () {},
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
+            ),
+          ],
+        ),
+        AnimationIconButton(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
+          unSelectedIcon: Icon(
+            Icons.bookmark_outline,
+            size: 28,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '좋아요 320개',
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                ReadMoreText(
-                  'Junewoo Park 내용내용내용내용내용내용내용내용내내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내내용내용용내용내용내',
-                  style: TextStyle(color: Colors.black),
-                  textAlign: TextAlign.start,
-                  colorClickableText: Colors.black,
-                  trimCollapsedText: '더보기',
-                  trimExpandedText: 's',
-                  trimLines: 2,
-                  trimMode: TrimMode.Length,
-                  trimLength: 50,
-                  moreStyle: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5, bottom: 5),
-                  child: InkWell(
-                    onTap: () {},
-                    child: Text(
-                      '댓글 350개 모두 보기',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                ),
-                Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 12,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Text(
-                          '댓글 달기...',
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    )
-                  ],
-                )
-              ],
+          selectedIcon: Icon(
+            Icons.bookmark,
+            size: 28,
+          ),
+          onTap: () {},
+        )
+      ],
+    );
+  }
+}
+
+class CardBottomTexts extends StatelessWidget {
+  const CardBottomTexts({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8, right: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '좋아요 320개',
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
             ),
           ),
+          ReadMoreText(
+            'Junewoo Park 내용내용내용내용내용내용내용내용내내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내내용내용용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내내용내용용내용내용내',
+            style: TextStyle(color: Colors.black),
+            textAlign: TextAlign.start,
+            colorClickableText: Colors.black,
+            trimCollapsedText: '더보기',
+            trimExpandedText: 's',
+            trimLines: 2,
+            trimMode: TrimMode.Length,
+            trimLength: 50,
+            moreStyle: TextStyle(
+              color: Colors.grey,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 5, bottom: 5),
+            child: InkWell(
+              onTap: () {},
+              child: Text(
+                '댓글 350개 모두 보기',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          ),
+          Row(
+            children: [
+              CircleAvatar(
+                radius: 12,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: InkWell(
+                  onTap: () {},
+                  child: Text(
+                    '댓글 달기...',
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
+            ],
+          )
         ],
       ),
     );

@@ -33,30 +33,24 @@ class HomePage extends GetView {
         backgroundColor: mainColor,
         elevation: 0.0,
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: ListView(
-            children: <Widget>[
-              CircleProfileBar(),
-              SizedBox(height: 5),
-              Divider(
-                thickness: 0.5,
-              ),
-              ListView.separated(
-                shrinkWrap: true,
-                physics: ScrollPhysics(),
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: 30);
-                },
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return StoryCard();
-                },
-              )
-            ],
+      body: ListView(
+        children: <Widget>[
+          CircleProfileBar(),
+          SizedBox(height: 5),
+          Divider(thickness: 0.5),
+          ListView.separated(
+            shrinkWrap: true,
+            physics: ScrollPhysics(),
+            separatorBuilder: (context, index) {
+              return SizedBox(height: 30);
+            },
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return StoryCard();
+            },
           ),
-        ),
+          SizedBox(height: 100),
+        ],
       ),
     );
   }
