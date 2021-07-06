@@ -8,7 +8,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final PageController _controller = PageController(initialPage: 0);
+  PageController _controller;
+  int pageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PageController(initialPage: pageIndex);
+  }
 
   @override
   void dispose() {

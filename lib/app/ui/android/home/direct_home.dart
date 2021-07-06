@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_instagram/app/controller/home/direct_page_controller.dart';
 import 'package:flutter_clean_instagram/app/ui/android/home/widgets/action_icon_button.dart';
+import 'package:flutter_clean_instagram/app/ui/android/home/widgets/chat_view.dart';
+import 'package:flutter_clean_instagram/app/ui/android/home/widgets/rooms_view.dart';
 import 'package:get/get.dart';
 
-class DirectPage extends GetView {
+class DirectPage extends GetView<DirectPageController> {
   final Function onBackTap;
   const DirectPage({this.onBackTap});
 
@@ -62,14 +64,11 @@ class DirectPage extends GetView {
         ),
       ),
       body: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
         controller: _tabx.controller,
         children: [
-          Center(
-            child: Text('hi'),
-          ),
-          Center(
-            child: Text('hi'),
-          ),
+          ChatView(),
+          RoomsView(),
         ],
       ),
     );
