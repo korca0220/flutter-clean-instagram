@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_instagram/app/ui/android/shop/shop_page.dart';
+import 'package:flutter_clean_instagram/app/ui/android/widgets/search_filed_button.dart';
 import 'package:get/get.dart';
 
 class ChatView extends GetView {

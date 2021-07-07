@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_instagram/app/ui/android/widgets/action_icon_button.dart';
+import 'package:flutter_clean_instagram/app/ui/android/widgets/search_filed_button.dart';
+import 'package:flutter_clean_instagram/app/ui/theme/app_text_theme.dart';
 import 'package:get/get.dart';
 
 class ShopPage extends GetView {
+  List<String> lists = ['Shop', '에디터 추천', '컬렉션', '가이드', '동영상'];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
+        physics: ScrollPhysics(),
         child: Column(
           children: <Widget>[
             Row(
@@ -16,7 +21,7 @@ class ShopPage extends GetView {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Shop',
-                    style: TextStyle(fontSize: 22),
+                    style: tabTitleTextStyle,
                   ),
                 ),
                 Row(
@@ -35,6 +40,20 @@ class ShopPage extends GetView {
               hintText: 'Search 검색',
               onTap: () {},
             ),
+            Container(
+              padding: EdgeInsets.only(left: 10),
+              height: 30,
+              child: ListView.separated(
+                separatorBuilder: (context, index) {
+                  return SizedBox(width: 8);
+                },
+                scrollDirection: Axis.horizontal,
+                itemCount: lists.length,
+                itemBuilder: (context, index) {
+                  return ShopListItem(text: lists[index]);
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -42,44 +61,30 @@ class ShopPage extends GetView {
   }
 }
 
-class SearchFieldButton extends StatelessWidget {
-  final String hintText;
+class ShopListItem extends StatelessWidget {
+  final String text;
   final Function onTap;
-  const SearchFieldButton({this.hintText, this.onTap});
+  const ShopListItem({this.text, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () {},
       child: Container(
-        height: 35,
-        margin: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 10,
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.grey[300],
+          border: Border.all(width: 1.0, color: Colors.grey),
+          borderRadius: BorderRadius.circular(8),
         ),
-        child: Row(
-          children: [
-            SizedBox(width: 15),
-            Icon(
-              Icons.search,
-              size: 20,
-              color: Colors.grey,
-            ),
-            SizedBox(width: 10),
-            Padding(
-              padding: EdgeInsets.only(bottom: 4),
-              child: Text(
-                hintText,
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
-            )
-          ],
+        child: Text(
+          text,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 13,
+          ),
         ),
       ),
     );

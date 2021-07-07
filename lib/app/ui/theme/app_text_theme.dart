@@ -5,5 +5,9 @@ final TextStyle appBarTextStyle = TextStyle(
   fontSize: 24,
   color: basicTextColor,
   fontFamily: 'Aveny',
-  fontWeight: FontWeight.normal,
+);
+
+final TextStyle tabTitleTextStyle = TextStyle(
+  fontSize: 22,
+  fontWeight: FontWeight.w700,
 );

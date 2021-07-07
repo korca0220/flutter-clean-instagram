@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_instagram/app/controller/home/direct_page_controller.dart';
-import 'package:flutter_clean_instagram/app/ui/android/home/widgets/action_icon_button.dart';
+import 'package:flutter_clean_instagram/app/ui/android/widgets/action_icon_button.dart';
 import 'package:flutter_clean_instagram/app/ui/android/home/widgets/chat_view.dart';
 import 'package:flutter_clean_instagram/app/ui/android/home/widgets/rooms_view.dart';
 import 'package:get/get.dart';

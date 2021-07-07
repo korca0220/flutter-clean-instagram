@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_instagram/app/ui/android/home/widgets/action_icon_button.dart';
+import 'package:flutter_clean_instagram/app/ui/android/widgets/action_icon_button.dart';
 import 'package:flutter_clean_instagram/app/ui/android/home/widgets/circle_profile_bar.dart';
 import 'package:flutter_clean_instagram/app/ui/android/home/widgets/story_card.dart';
 import 'package:flutter_clean_instagram/app/ui/theme/app_colors.dart';

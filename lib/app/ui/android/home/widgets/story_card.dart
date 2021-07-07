@@ -2,8 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_instagram/app/ui/android/home/widgets/action_icon_button.dart';
-import 'package:flutter_clean_instagram/app/ui/android/home/widgets/animation_Icon_button.dart';
+import 'package:flutter_clean_instagram/app/ui/android/widgets/action_icon_button.dart';
+import 'package:flutter_clean_instagram/app/ui/android/widgets/animation_Icon_button.dart';
 import 'package:readmore/readmore.dart';
 
 class StoryCard extends StatefulWidget {
