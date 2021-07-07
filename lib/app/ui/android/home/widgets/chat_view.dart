@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_instagram/app/ui/android/shop/shop_page.dart';
 import 'package:get/get.dart';
 
 class ChatView extends GetView {
@@ -10,39 +11,9 @@ class ChatView extends GetView {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          InkWell(
+          SearchFieldButton(
+            hintText: '검색',
             onTap: () {},
-            child: Container(
-              height: 35,
-              margin: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 10,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.grey[300],
-              ),
-              child: Row(
-                children: [
-                  SizedBox(width: 15),
-                  Icon(
-                    Icons.search,
-                    size: 20,
-                    color: Colors.grey,
-                  ),
-                  SizedBox(width: 10),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 4),
-                    child: Text(
-                      '검색',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
           ),
           Align(
             alignment: Alignment.center,
