@@ -64,7 +64,7 @@ class ChatView extends GetView {
           ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: 5,
+            itemCount: 10,
             itemBuilder: (context, index) {
               return ListTile(
                 leading: CircleAvatar(

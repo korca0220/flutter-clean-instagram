@@ -28,11 +28,12 @@ class DirectPage extends GetView<DirectPageController> {
           ),
           onPressed: () {},
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
                 'parkjunewoo',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   color: Colors.black,
                 ),
               ),
