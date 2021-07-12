@@ -7,7 +7,7 @@ import 'package:flutter_clean_instagram/app/ui/android/search/search_page.dart';
 import 'package:flutter_clean_instagram/app/ui/android/shop/shop_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-class TabScreen extends StatelessWidget {
+class TabPage extends StatelessWidget {
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
 

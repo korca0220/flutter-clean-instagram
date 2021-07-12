@@ -15,27 +15,30 @@ class ShopPage extends GetView {
         physics: ScrollPhysics(),
         child: Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Shop',
-                    style: tabTitleTextStyle,
-                  ),
-                ),
-                Row(
-                  children: [
-                    ActionIconButton(
-                      icon: Icons.collections_bookmark_outlined,
+            Container(
+              padding: EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Shop',
+                      style: tabTitleTextStyle,
                     ),
-                    ActionIconButton(
-                      icon: Icons.menu,
-                    )
-                  ],
-                )
-              ],
+                  ),
+                  Row(
+                    children: [
+                      ActionIconButton(
+                        icon: Icons.collections_bookmark_outlined,
+                      ),
+                      ActionIconButton(
+                        icon: Icons.menu,
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
             SearchFieldButton(
               hintText: 'Search 검색',

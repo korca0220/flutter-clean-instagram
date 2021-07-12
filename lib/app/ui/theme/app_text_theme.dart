@@ -4,7 +4,7 @@ import 'package:flutter_clean_instagram/app/ui/theme/app_colors.dart';
 final TextStyle appBarTextStyle = TextStyle(
   fontSize: 24,
   color: basicTextColor,
-  fontFamily: 'Aveny',
+  fontFamily: 'Billabong',
 );
 
 final TextStyle tabTitleTextStyle = TextStyle(
