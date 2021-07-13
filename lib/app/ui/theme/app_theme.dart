@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_instagram/app/ui/theme/app_text_theme.dart';
 
 final ThemeData appThemeData = ThemeData(
   primaryColor: Colors.white,
   scaffoldBackgroundColor: Colors.white,
+  textTheme: TextTheme(
+    headline3: loginTitleTextstyle,
+  ),
 );
 
 final BoxDecoration defaultBoxDecoration = BoxDecoration(

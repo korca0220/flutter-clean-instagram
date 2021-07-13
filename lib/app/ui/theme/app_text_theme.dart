@@ -12,3 +12,9 @@ final TextStyle tabTitleTextStyle = TextStyle(
   fontWeight: FontWeight.w700,
   color: basicTextColor,
 );
+
+final TextStyle loginTitleTextstyle = TextStyle(
+  fontSize: 50,
+  color: basicTextColor,
+  fontFamily: 'Billabong',
+);

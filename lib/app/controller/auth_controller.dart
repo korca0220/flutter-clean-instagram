@@ -58,6 +58,7 @@ class AuthController extends GetxController {
         "Error signing in",
         e.message,
         snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
       );
     }
   }
