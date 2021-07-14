@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_instagram/app/controller/auth_controller.dart';
 import 'package:flutter_clean_instagram/app/controller/login_page/login_page_controller.dart';
+import 'package:flutter_clean_instagram/app/ui/android/login/widgets/go_back_button.dart';
 import 'package:flutter_clean_instagram/app/ui/android/login/widgets/rounded_button.dart';
-import 'package:flutter_clean_instagram/app/ui/android/login/widgets/rounded_input_field.dart';
+import 'package:flutter_clean_instagram/app/ui/android/login/widgets/rounded_email_field.dart';
 import 'package:flutter_clean_instagram/app/ui/android/login/widgets/rounded_password_field.dart';
+import 'package:flutter_clean_instagram/app/ui/android/login/widgets/sign_up_button.dart';
+import 'package:flutter_clean_instagram/app/ui/theme/app_text_theme.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends GetView<AuthController> {
-  final int _initalIndex = 0;
+  final _formKey = GlobalKey<FormState>();
   Duration get loginTime => Duration(milliseconds: 2250);
 
   @override
   Widget build(BuildContext context) {
-    LoginPageController loginController = Get.put(LoginPageController());
+    LoginPageController pageController = Get.put(LoginPageController());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -34,17 +37,16 @@ class LoginPage extends GetView<AuthController> {
             SizedBox(height: 40),
             Container(
               height: MediaQuery.of(context).size.height * 0.6,
-              // color: Colors.red,
               child: PageView(
-                controller: loginController.controller,
-                // physics: NeverScrollableScrollPhysics(),
+                controller: pageController.pageController,
+                physics: NeverScrollableScrollPhysics(),
                 children: [
                   Column(
                     children: [
                       SignInButton(
                         Buttons.Email,
                         onPressed: () {
-                          loginController.controller.animateToPage(1,
+                          pageController.pageController.animateToPage(1,
                               duration: Duration(milliseconds: 300),
                               curve: Curves.ease);
                         },
@@ -52,7 +54,7 @@ class LoginPage extends GetView<AuthController> {
                       SignInButton(
                         Buttons.GoogleDark,
                         onPressed: () {
-                          loginController.controller.animateToPage(2,
+                          pageController.pageController.animateToPage(2,
                               duration: Duration(milliseconds: 300),
                               curve: Curves.ease);
                         },
@@ -64,69 +66,43 @@ class LoginPage extends GetView<AuthController> {
                       width: MediaQuery.of(context).size.width * 0.7,
                       child: Column(
                         children: [
-                          RoundedInputField(
-                            controller: loginController.emailController,
-                            hintText: "Your Email",
-                            icon: Icons.person,
-                            onChanged: (value) {},
-                          ),
-                          RoundedPasswordField(
-                            controller: loginController.passwordController,
-                            onChanged: (value) {},
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              children: [
+                                RoundedEmailField(
+                                  controller: controller.emailController,
+                                  hintText: "Your Email",
+                                  icon: Icons.person,
+                                  onChanged: (value) {},
+                                ),
+                                RoundedPasswordField(
+                                  controller: controller.passwordController,
+                                  onChanged: (value) {},
+                                ),
+                              ],
+                            ),
                           ),
                           SizedBox(height: 10),
                           RoundedButton(
                             text: "Login",
                             onPressed: () {
-                              controller.login(
-                                loginController.emailController.text,
-                                loginController.passwordController.text,
-                              );
+                              if (_formKey.currentState.validate()) {
+                                controller.login(
+                                  controller.emailController.text,
+                                  controller.passwordController.text,
+                                );
+                              }
                             },
                           ),
                           Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    loginController.controller.animateToPage(
-                                        _initalIndex,
-                                        duration: Duration(milliseconds: 300),
-                                        curve: Curves.ease);
-                                  },
-                                  child: Text(
-                                    'Go Back',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    'Sign Up',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                              ])
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              GoBackButton(),
+                              SignUpButton(),
+                            ],
+                          )
                         ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    child: Center(
-                      child: ElevatedButton(
-                        child: Text('Go Back'),
-                        style: ElevatedButton.styleFrom(),
-                        onPressed: () {
-                          loginController.controller.animateToPage(_initalIndex,
-                              duration: Duration(milliseconds: 300),
-                              curve: Curves.ease);
-                        },
                       ),
                     ),
                   ),

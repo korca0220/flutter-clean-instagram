@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_clean_instagram/app/controller/user_controller.dart';
 import 'package:flutter_clean_instagram/app/data/model/user_model.dart';
 import 'package:flutter_clean_instagram/app/data/repository/auth_repository.dart';
+import 'package:flutter_clean_instagram/app/ui/android/widgets/loading_indicator.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -10,7 +12,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthController extends GetxController {
   final AuthRepository repository;
   AuthController({@required this.repository}) : assert(repository != null);
-
+  TextEditingController emailController;
+  TextEditingController displayNameController;
+  TextEditingController passwordController;
+  TextEditingController confirmPasswordController;
   FirebaseAuth _auth = FirebaseAuth.instance;
   GoogleSignIn googleSignIn = GoogleSignIn();
   Rx<User> _firebaseUser = Rx<User>(FirebaseAuth.instance.currentUser);
@@ -20,7 +25,20 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    emailController = TextEditingController();
+    displayNameController = TextEditingController();
+    passwordController = TextEditingController();
+    confirmPasswordController = TextEditingController();
     _firebaseUser.bindStream(_auth.authStateChanges());
+  }
+
+  @override
+  void onClose() {
+    emailController.dispose();
+    displayNameController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.onClose();
   }
 
   void createUser(String name, String email, String password) async {
@@ -46,6 +64,7 @@ class AuthController extends GetxController {
   }
 
   void login(String email, String password) async {
+    showLoadingIndicator();
     try {
       UserCredential _authResult = await _auth.signInWithEmailAndPassword(
         email: email,

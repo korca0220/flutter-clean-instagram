@@ -2,8 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_instagram/app/bindings/auth_binding.dart';
 import 'package:flutter_clean_instagram/app/routes/app_pages.dart';
-import 'package:flutter_clean_instagram/app/ui/android/bottom_navigation/tab_page.dart';
-import 'package:flutter_clean_instagram/app/ui/android/home/main_home.dart';
 import 'package:flutter_clean_instagram/app/ui/android/root/root_page.dart';
 import 'package:flutter_clean_instagram/app/ui/theme/app_theme.dart';
 import 'package:get/get.dart';

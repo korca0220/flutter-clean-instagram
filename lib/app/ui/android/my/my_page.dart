@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_instagram/app/controller/auth_controller.dart';
 import 'package:flutter_clean_instagram/app/controller/my/profile_controller.dart';
 import 'package:flutter_clean_instagram/app/ui/android/my/widgets/column_button.dart';
 import 'package:flutter_clean_instagram/app/ui/android/widgets/action_icon_button.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_clean_instagram/app/ui/theme/app_text_theme.dart';
 import 'package:flutter_clean_instagram/app/ui/theme/app_theme.dart';
 import 'package:get/get.dart';
 
-class MyPage extends GetView<ProfileController> {
+class MyPage extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     final ProfileController _tabx = Get.put(ProfileController());
@@ -23,7 +24,9 @@ class MyPage extends GetView<ProfileController> {
                   padding: EdgeInsets.zero,
                   primary: Colors.white,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  controller.signOut();
+                },
                 child: Row(
                   children: <Widget>[
                     Text(

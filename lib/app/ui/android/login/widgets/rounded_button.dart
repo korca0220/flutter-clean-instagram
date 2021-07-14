@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_instagram/app/ui/theme/app_colors.dart';
 
 class RoundedButton extends StatelessWidget {
   final String text;
@@ -17,7 +18,7 @@ class RoundedButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
             elevation: 0.0,
-            primary: Colors.grey,
+            primary: formBoxColor,
           ),
           child: Text(
             text,

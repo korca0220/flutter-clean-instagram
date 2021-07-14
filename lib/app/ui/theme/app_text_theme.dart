@@ -18,3 +18,8 @@ final TextStyle loginTitleTextstyle = TextStyle(
   color: basicTextColor,
   fontFamily: 'Billabong',
 );
+
+final TextStyle textButtonStyle = TextStyle(
+  color: Colors.grey,
+  fontSize: 16,
+);

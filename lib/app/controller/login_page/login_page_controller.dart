@@ -3,23 +3,17 @@ import 'package:get/get.dart';
 
 class LoginPageController extends GetxController
     with SingleGetTickerProviderMixin {
-  PageController controller;
-  TextEditingController emailController;
-  TextEditingController passwordController;
+  PageController pageController;
 
   @override
   void onInit() {
     super.onInit();
-    controller = PageController(initialPage: 0, keepPage: false);
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
+    pageController = PageController(initialPage: 0, keepPage: false);
   }
 
   @override
   void onClose() {
     super.onClose();
-    controller.dispose();
-    emailController.dispose();
-    passwordController.dispose();
+    pageController.dispose();
   }
 }
