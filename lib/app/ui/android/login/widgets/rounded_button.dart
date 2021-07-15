@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_instagram/app/ui/theme/app_colors.dart';
 
 class RoundedButton extends StatelessWidget {
-  final String text;
   final Function onPressed;
-  const RoundedButton({this.text, this.onPressed});
+  final Widget child;
+  const RoundedButton({this.onPressed, this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +20,7 @@ class RoundedButton extends StatelessWidget {
             elevation: 0.0,
             primary: formBoxColor,
           ),
-          child: Text(
-            text,
-            style: TextStyle(
-              fontSize: 18,
-            ),
-          ),
+          child: child,
         ),
       ),
     );

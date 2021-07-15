@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_instagram/app/controller/user_controller.dart';
 import 'package:flutter_clean_instagram/app/data/model/user_model.dart';
 import 'package:flutter_clean_instagram/app/data/repository/auth_repository.dart';
-import 'package:flutter_clean_instagram/app/ui/android/widgets/loading_indicator.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -19,6 +18,7 @@ class AuthController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
   GoogleSignIn googleSignIn = GoogleSignIn();
   Rx<User> _firebaseUser = Rx<User>(FirebaseAuth.instance.currentUser);
+  RxBool isLoading = false.obs;
 
   User get user => _firebaseUser.value;
 
@@ -43,6 +43,7 @@ class AuthController extends GetxController {
 
   void createUser(String name, String email, String password) async {
     try {
+      isLoading.value = true;
       UserCredential _authResult = await _auth.createUserWithEmailAndPassword(
           email: email.trim(), password: password);
       UserModel _user = UserModel(
@@ -50,9 +51,14 @@ class AuthController extends GetxController {
         name: name,
         email: email,
       );
+
+      isLoading.value = false;
+      emailController.clear();
+      displayNameController.clear();
+      passwordController.clear();
+      confirmPasswordController.clear();
       if (await repository.createNewUser(_user)) {
         Get.find<UserController>().user = _user;
-        Get.back();
       }
     } catch (e) {
       Get.snackbar(
@@ -60,11 +66,16 @@ class AuthController extends GetxController {
         e.message,
         snackPosition: SnackPosition.BOTTOM,
       );
+      emailController.clear();
+      displayNameController.clear();
+      passwordController.clear();
+      confirmPasswordController.clear();
+      isLoading.value = false;
     }
   }
 
   void login(String email, String password) async {
-    showLoadingIndicator();
+    isLoading.value = true;
     try {
       UserCredential _authResult = await _auth.signInWithEmailAndPassword(
         email: email,
@@ -72,6 +83,9 @@ class AuthController extends GetxController {
       );
       Get.find<UserController>().user =
           await repository.getUser(_authResult.user.uid);
+      isLoading.value = false;
+      emailController.clear();
+      passwordController.clear();
     } catch (e) {
       Get.snackbar(
         "Error signing in",

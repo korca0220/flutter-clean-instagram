@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_instagram/app/controller/auth_controller.dart';
-import 'package:flutter_clean_instagram/app/controller/login_page/regiest_form_controller.dart';
 import 'package:flutter_clean_instagram/app/ui/android/login/widgets/regist_input_field.dart';
 import 'package:flutter_clean_instagram/app/ui/android/login/widgets/validations.dart';
 import 'package:flutter_clean_instagram/app/ui/theme/app_colors.dart';
@@ -31,7 +30,6 @@ class SignupDialog extends GetWidget<AuthController> {
   Widget build(BuildContext context) {
     return AlertDialog(
       content: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
         child: Stack(
           clipBehavior: Clip.none,
           children: <Widget>[
@@ -62,7 +60,6 @@ class SignupDialog extends GetWidget<AuthController> {
             Form(
               key: _formKey,
               child: Column(
-                // mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top: 50),
@@ -124,6 +121,7 @@ class SignupDialog extends GetWidget<AuthController> {
                             controller.emailController.text,
                             controller.passwordController.text,
                           );
+                          Get.back();
                         }
                       },
                     ),

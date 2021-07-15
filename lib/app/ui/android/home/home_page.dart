@@ -1,37 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_instagram/app/controller/home/home_controller.dart';
 import 'package:flutter_clean_instagram/app/ui/android/home/direct_home.dart';
 import 'package:flutter_clean_instagram/app/ui/android/home/main_home.dart';
+import 'package:get/get.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  PageController _controller;
-  int pageIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = PageController(initialPage: pageIndex);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
+class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
+    HomeController controller = Get.put(HomeController());
     return PageView(
-      controller: _controller,
+      controller: controller.pageController,
       children: [
         MainPage(),
         DirectPage(
           onBackTap: () {
-            _controller.previousPage(
+            controller.pageController.previousPage(
                 duration: Duration(milliseconds: 300), curve: Curves.linear);
           },
         ),
