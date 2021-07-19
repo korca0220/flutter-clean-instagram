@@ -14,6 +14,7 @@ class RootPage extends GetWidget<AuthController> {
       },
       builder: (_) {
         if (Get.find<AuthController>().user?.uid != null) {
+          controller.getUser();
           return TabPage();
         } else {
           return LoginPage();

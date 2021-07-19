@@ -6,6 +6,7 @@ import 'package:flutter_clean_instagram/app/ui/android/login/widgets/rounded_but
 import 'package:flutter_clean_instagram/app/ui/android/login/widgets/rounded_email_field.dart';
 import 'package:flutter_clean_instagram/app/ui/android/login/widgets/rounded_password_field.dart';
 import 'package:flutter_clean_instagram/app/ui/android/login/widgets/sign_up_button.dart';
+import 'package:flutter_clean_instagram/app/ui/android/widgets/loading_indicator.dart';
 import 'package:flutter_clean_instagram/app/ui/theme/app_colors.dart';
 import 'package:flutter_clean_instagram/app/ui/theme/app_text_theme.dart';
 import 'package:flutter_signin_button/button_list.dart';
@@ -56,9 +57,7 @@ class LoginPage extends GetView<AuthController> {
                         SignInButton(
                           Buttons.GoogleDark,
                           onPressed: () {
-                            pageController.pageController.animateToPage(2,
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.ease);
+                            controller.googleLogin();
                           },
                         ),
                       ],

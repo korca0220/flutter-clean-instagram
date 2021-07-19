@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_instagram/app/controller/auth_controller.dart';
 import 'package:flutter_clean_instagram/app/controller/my/profile_controller.dart';
+import 'package:flutter_clean_instagram/app/controller/user_controller.dart';
 import 'package:flutter_clean_instagram/app/ui/android/my/widgets/column_button.dart';
 import 'package:flutter_clean_instagram/app/ui/android/widgets/action_icon_button.dart';
 import 'package:flutter_clean_instagram/app/ui/theme/app_colors.dart';
@@ -12,6 +13,7 @@ class MyPage extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     final ProfileController _tabx = Get.put(ProfileController());
+    final UserController _userController = Get.put(UserController());
     return SafeArea(
       child: Scaffold(
           appBar: PreferredSize(
@@ -25,12 +27,12 @@ class MyPage extends GetView<AuthController> {
                   primary: Colors.white,
                 ),
                 onPressed: () {
-                  controller.signOut();
+                  // controller.signOut();
                 },
                 child: Row(
                   children: <Widget>[
                     Text(
-                      'parkjunewoo',
+                      _userController.user.name,
                       style: tabTitleTextStyle,
                     ),
                     Icon(
@@ -67,26 +69,31 @@ class MyPage extends GetView<AuthController> {
                               children: [
                                 CircleAvatar(
                                   radius: 36,
+                                  backgroundImage:
+                                      _userController.user.photoURL != null
+                                          ? NetworkImage(
+                                              _userController.user.photoURL)
+                                          : null,
                                 ),
                                 SizedBox(height: 10),
-                                Text('Junewoo park')
+                                Text(_userController.user.name)
                               ],
                             ),
                             ColumnButton(
                               columnTextList: [
-                                Text('1'),
+                                Text(_userController.user.postCount.toString()),
                                 Text('게시물'),
                               ],
                             ),
                             ColumnButton(
                               columnTextList: [
-                                Text('404'),
+                                Text(_userController.user.follow.toString()),
                                 Text('팔로우'),
                               ],
                             ),
                             ColumnButton(
                               columnTextList: [
-                                Text('1213'),
+                                Text(_userController.user.following.toString()),
                                 Text('팔로잉'),
                               ],
                             )

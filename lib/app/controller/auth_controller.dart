@@ -41,11 +41,22 @@ class AuthController extends GetxController {
     super.onClose();
   }
 
+  void getUser() async {
+    if (_auth.currentUser != null) {
+      Get.find<UserController>().user =
+          await repository.getUser(_auth.currentUser.uid);
+    }
+  }
+
   void createUser(String name, String email, String password) async {
     try {
       isLoading.value = true;
       UserCredential _authResult = await _auth.createUserWithEmailAndPassword(
           email: email.trim(), password: password);
+
+      if (_authResult != null) {
+        _authResult.user.updateDisplayName(name);
+      }
       UserModel _user = UserModel(
         id: _authResult.user.uid,
         name: name,
@@ -93,10 +104,12 @@ class AuthController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
         margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
       );
+      isLoading.value = false;
     }
   }
 
   void googleLogin() async {
+    isLoading.value = true;
     try {
       GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
       GoogleSignInAuthentication googleSignInAuthentication =
@@ -106,7 +119,17 @@ class AuthController extends GetxController {
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
+      isLoading.value = false;
       User _authResult = (await _auth.signInWithCredential(credential)).user;
+
+      if (Get.find<UserController>().user.id == null) {
+        UserModel _user = UserModel(
+            id: _authResult.uid,
+            name: _authResult.displayName,
+            email: _authResult.email,
+            photoURL: _authResult.photoURL);
+        await repository.createNewUser(_user);
+      }
       Get.find<UserController>().user =
           await repository.getUser(_authResult.uid);
     } catch (e) {
