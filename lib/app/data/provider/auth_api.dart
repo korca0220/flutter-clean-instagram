@@ -7,8 +7,14 @@ class AuthAPi {
 
   Future<bool> createNewUser(UserModel user) async {
     try {
-      await _firestore.collection("users").doc(user.id).set(
-          {"name": user.name, "email": user.email, "photoURL": user.photoURL});
+      await _firestore.collection("users").doc(user.id).set({
+        "name": user.name,
+        "email": user.email,
+        "photoURL": user.photoURL,
+        "postCount": 0,
+        "follow": 0,
+        "following": 0,
+      });
       return true;
     } catch (e) {
       print(e);
