@@ -25,106 +25,109 @@ class LoginPage extends GetView<AuthController> {
       appBar: AppBar(
         elevation: 0.0,
       ),
-      body: GetX<AuthController>(builder: (_) {
-        return Center(
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Instagram',
-                style: TextStyle(
-                  fontFamily: 'Billabong',
-                  fontSize: 60,
-                  fontWeight: FontWeight.w500,
+      body: GetX<AuthController>(
+        builder: (_) {
+          return Center(
+            child: Column(
+              children: <Widget>[
+                Text(
+                  'Instagram',
+                  style: TextStyle(
+                    fontFamily: 'Billabong',
+                    fontSize: 60,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-              SizedBox(height: 40),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.6,
-                child: PageView(
-                  controller: pageController.pageController,
-                  physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    Column(
-                      children: [
-                        SignInButton(
-                          Buttons.Email,
-                          onPressed: () {
-                            pageController.pageController.animateToPage(1,
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.ease);
-                          },
-                        ),
-                        SignInButton(
-                          Buttons.GoogleDark,
-                          onPressed: () {
-                            controller.googleLogin();
-                          },
-                        ),
-                      ],
-                    ),
-                    Center(
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.7,
-                        child: Column(
-                          children: [
-                            Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  RoundedEmailField(
-                                    controller: controller.emailController,
-                                    hintText: "Your Email",
-                                    icon: Icons.person,
-                                    onChanged: (value) {},
-                                  ),
-                                  RoundedPasswordField(
-                                    controller: controller.passwordController,
-                                    onChanged: (value) {},
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            RoundedButton(
-                              child: _.isLoading.value
-                                  ? SizedBox(
-                                      child: CircularProgressIndicator(
-                                        color: containerColor,
-                                      ),
-                                      height: 20,
-                                      width: 20,
-                                    )
-                                  : Text(
-                                      'Login',
-                                      style: TextStyle(fontSize: 16),
+                SizedBox(height: 40),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  child: PageView(
+                    controller: pageController.pageController,
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      Column(
+                        children: [
+                          SignInButton(
+                            Buttons.Email,
+                            onPressed: () {
+                              pageController.pageController.animateToPage(1,
+                                  duration: Duration(milliseconds: 300),
+                                  curve: Curves.ease);
+                            },
+                          ),
+                          SignInButton(
+                            Buttons.GoogleDark,
+                            onPressed: () {
+                              controller.googleLogin();
+                            },
+                          ),
+                        ],
+                      ),
+                      Center(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          child: Column(
+                            children: [
+                              Form(
+                                key: _formKey,
+                                child: Column(
+                                  children: [
+                                    RoundedEmailField(
+                                      controller: controller.emailController,
+                                      hintText: "Your Email",
+                                      icon: Icons.person,
+                                      onChanged: (value) {},
                                     ),
-                              onPressed: () {
-                                if (_formKey.currentState.validate()) {
-                                  controller.login(
-                                    controller.emailController.text,
-                                    controller.passwordController.text,
-                                  );
-                                }
-                              },
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                GoBackButton(),
-                                SignUpButton(),
-                              ],
-                            )
-                          ],
+                                    RoundedPasswordField(
+                                      controller: controller.passwordController,
+                                      onChanged: (value) {},
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              RoundedButton(
+                                child: _.isLoading.value
+                                    ? SizedBox(
+                                        child: CircularProgressIndicator(
+                                          color: containerColor,
+                                        ),
+                                        height: 20,
+                                        width: 20,
+                                      )
+                                    : Text(
+                                        'Login',
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                onPressed: () {
+                                  if (_formKey.currentState.validate()) {
+                                    controller.login(
+                                      controller.emailController.text,
+                                      controller.passwordController.text,
+                                    );
+                                  }
+                                },
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  GoBackButton(),
+                                  SignUpButton(),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        );
-      }),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

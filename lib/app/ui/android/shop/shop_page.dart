@@ -10,55 +10,57 @@ class ShopPage extends GetView {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        physics: ScrollPhysics(),
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Shop',
-                      style: tabTitleTextStyle,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      ActionIconButton(
-                        icon: Icons.collections_bookmark_outlined,
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: ScrollPhysics(),
+          child: Column(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Shop',
+                        style: tabTitleTextStyle,
                       ),
-                      ActionIconButton(
-                        icon: Icons.menu,
-                      )
-                    ],
-                  )
-                ],
+                    ),
+                    Row(
+                      children: [
+                        ActionIconButton(
+                          icon: Icons.collections_bookmark_outlined,
+                        ),
+                        ActionIconButton(
+                          icon: Icons.menu,
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
-            ),
-            SearchFieldButton(
-              hintText: 'Search 검색',
-              onTap: () {},
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 10),
-              height: 30,
-              child: ListView.separated(
-                separatorBuilder: (context, index) {
-                  return SizedBox(width: 8);
-                },
-                scrollDirection: Axis.horizontal,
-                itemCount: lists.length,
-                itemBuilder: (context, index) {
-                  return ShopListItem(text: lists[index]);
-                },
+              SearchFieldButton(
+                hintText: 'Search 검색',
+                onTap: () {},
               ),
-            ),
-          ],
+              Container(
+                padding: EdgeInsets.only(left: 10),
+                height: 30,
+                child: ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return SizedBox(width: 8);
+                  },
+                  scrollDirection: Axis.horizontal,
+                  itemCount: lists.length,
+                  itemBuilder: (context, index) {
+                    return ShopListItem(text: lists[index]);
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -4,6 +4,10 @@ import 'package:get/get.dart';
 class RealsPage extends GetView {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: SafeArea(
+        child: Container(),
+      ),
+    );
   }
 }

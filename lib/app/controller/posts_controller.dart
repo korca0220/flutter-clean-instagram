@@ -22,4 +22,8 @@ class PostsController extends GetxController {
       }
     }
   }
+
+  uploadImage(String fileName, var imageFile) {
+    return repository.uploadImage(fileName, imageFile);
+  }
 }

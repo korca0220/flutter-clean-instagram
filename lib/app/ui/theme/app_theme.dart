@@ -7,6 +7,7 @@ final ThemeData appThemeData = ThemeData(
   textTheme: TextTheme(
     headline3: loginTitleTextstyle,
   ),
+  canvasColor: Colors.transparent,
 );
 
 final BoxDecoration defaultBoxDecoration = BoxDecoration(

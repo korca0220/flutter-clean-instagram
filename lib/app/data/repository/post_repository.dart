@@ -7,4 +7,8 @@ class PostRepository {
   getMyPosts(String uid) {
     return clientApi.getMyPosts(uid);
   }
+
+  uploadImage(String fileName, var imageFile) {
+    return clientApi.uploadImage(fileName, imageFile);
+  }
 }

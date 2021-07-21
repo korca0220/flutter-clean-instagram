@@ -1,13 +1,18 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_instagram/app/controller/auth_controller.dart';
 import 'package:flutter_clean_instagram/app/controller/my/profile_controller.dart';
 import 'package:flutter_clean_instagram/app/controller/posts_controller.dart';
 import 'package:flutter_clean_instagram/app/controller/user_controller.dart';
 import 'package:flutter_clean_instagram/app/ui/android/my/widgets/column_button.dart';
+import 'package:flutter_clean_instagram/app/ui/android/my/widgets/menu_bottomsheet.dart';
 import 'package:flutter_clean_instagram/app/ui/android/widgets/action_icon_button.dart';
 import 'package:flutter_clean_instagram/app/ui/theme/app_colors.dart';
 import 'package:flutter_clean_instagram/app/ui/theme/app_text_theme.dart';
 import 'package:flutter_clean_instagram/app/ui/theme/app_theme.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class MyPage extends GetView<PostsController> {
   List<Widget> imageListGenerate(List<dynamic> imageUrlList) {
@@ -27,12 +32,34 @@ class MyPage extends GetView<PostsController> {
     return widgetList;
   }
 
+  uploadImage(String inputSource) async {
+    final picker = ImagePicker();
+    List<XFile> pickedImage;
+    List<Map<String, dynamic>> resultImageList = [];
+    try {
+      pickedImage = await picker.pickMultiImage(
+        maxWidth: 1920,
+      );
+      pickedImage.forEach((element) {
+        resultImageList.add({
+          "fileName": element.path,
+          "imageFile": File(
+            element.path,
+          ),
+        });
+        return resultImageList;
+      });
+    } catch (err) {
+      print(err);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final ProfileController _tabx = Get.put(ProfileController());
     final UserController _userController = Get.put(UserController());
-    return SafeArea(
-      child: GetX<PostsController>(
+    return Scaffold(
+      body: GetX<PostsController>(
           init: PostsController(),
           builder: (postController) {
             List<dynamic> images = [];
@@ -52,6 +79,7 @@ class MyPage extends GetView<PostsController> {
                     ),
                     onPressed: () {
                       // Get.find<AuthController>().signOut();
+                      uploadImage('camera');
                     },
                     child: Row(
                       children: <Widget>[
@@ -68,7 +96,12 @@ class MyPage extends GetView<PostsController> {
                   ),
                   actions: [
                     ActionIconButton(icon: Icons.add_box_outlined),
-                    ActionIconButton(icon: Icons.menu),
+                    ActionIconButton(
+                      icon: Icons.menu,
+                      onPressed: () {
+                        MenuBottomSheet.menuBottomSheet(context);
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -93,14 +126,14 @@ class MyPage extends GetView<PostsController> {
                                   children: [
                                     CircleAvatar(
                                       radius: 36,
-                                      backgroundImage:
-                                          _userController.user.photoURL != null
-                                              ? NetworkImage(
-                                                  _userController.user.photoURL)
-                                              : null,
+                                      backgroundImage: _userController
+                                              .user.photoURL.isNotEmpty
+                                          ? NetworkImage(
+                                              _userController.user.photoURL)
+                                          : null,
                                     ),
                                     SizedBox(height: 10),
-                                    // Text(_userController.user.name)
+                                    Text(_userController.user.name)
                                   ],
                                 ),
                                 ColumnButton(

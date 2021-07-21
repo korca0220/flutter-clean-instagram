@@ -122,6 +122,9 @@ class AuthController extends GetxController {
       isLoading.value = false;
       User _authResult = (await _auth.signInWithCredential(credential)).user;
 
+      Get.find<UserController>().user =
+          await repository.getUser(_authResult.uid);
+
       if (Get.find<UserController>().user.id == null) {
         UserModel _user = UserModel(
             id: _authResult.uid,
@@ -138,6 +141,7 @@ class AuthController extends GetxController {
         e.message,
         snackPosition: SnackPosition.BOTTOM,
       );
+      isLoading.value = false;
     }
   }
 
