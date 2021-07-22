@@ -5,6 +5,7 @@ import 'package:flutter_clean_instagram/app/controller/auth_controller.dart';
 import 'package:flutter_clean_instagram/app/controller/my/profile_controller.dart';
 import 'package:flutter_clean_instagram/app/controller/posts_controller.dart';
 import 'package:flutter_clean_instagram/app/controller/user_controller.dart';
+import 'package:flutter_clean_instagram/app/ui/android/detail/write_post_page.dart';
 import 'package:flutter_clean_instagram/app/ui/android/my/widgets/column_button.dart';
 import 'package:flutter_clean_instagram/app/ui/android/my/widgets/menu_bottomsheet.dart';
 import 'package:flutter_clean_instagram/app/ui/android/widgets/action_icon_button.dart';
@@ -95,7 +96,12 @@ class MyPage extends GetView<PostsController> {
                     ),
                   ),
                   actions: [
-                    ActionIconButton(icon: Icons.add_box_outlined),
+                    ActionIconButton(
+                      icon: Icons.add_box_outlined,
+                      onPressed: () {
+                        Get.to(() => WritePostPage());
+                      },
+                    ),
                     ActionIconButton(
                       icon: Icons.menu,
                       onPressed: () {

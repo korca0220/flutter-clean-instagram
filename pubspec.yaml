@@ -42,6 +42,7 @@ dependencies:
   firebase_storage: ^10.0.1
   image_picker: ^0.8.2
   path: ^1.8.0
+  storage_path: ^0.2.0
 
 
 dev_dependencies:
