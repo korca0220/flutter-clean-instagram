@@ -8,6 +8,7 @@ import 'package:flutter_clean_instagram/app/controller/user_controller.dart';
 import 'package:flutter_clean_instagram/app/ui/android/detail/write_post_page.dart';
 import 'package:flutter_clean_instagram/app/ui/android/my/widgets/column_button.dart';
 import 'package:flutter_clean_instagram/app/ui/android/my/widgets/menu_bottomsheet.dart';
+import 'package:flutter_clean_instagram/app/ui/android/my/widgets/write_bottomsheet.dart';
 import 'package:flutter_clean_instagram/app/ui/android/widgets/action_icon_button.dart';
 import 'package:flutter_clean_instagram/app/ui/theme/app_colors.dart';
 import 'package:flutter_clean_instagram/app/ui/theme/app_text_theme.dart';
@@ -31,28 +32,6 @@ class MyPage extends GetView<PostsController> {
       },
     );
     return widgetList;
-  }
-
-  uploadImage(String inputSource) async {
-    final picker = ImagePicker();
-    List<XFile> pickedImage;
-    List<Map<String, dynamic>> resultImageList = [];
-    try {
-      pickedImage = await picker.pickMultiImage(
-        maxWidth: 1920,
-      );
-      pickedImage.forEach((element) {
-        resultImageList.add({
-          "fileName": element.path,
-          "imageFile": File(
-            element.path,
-          ),
-        });
-        return resultImageList;
-      });
-    } catch (err) {
-      print(err);
-    }
   }
 
   @override
@@ -80,7 +59,7 @@ class MyPage extends GetView<PostsController> {
                     ),
                     onPressed: () {
                       // Get.find<AuthController>().signOut();
-                      uploadImage('camera');
+                      // uploadImage('camera');
                     },
                     child: Row(
                       children: <Widget>[
@@ -99,7 +78,8 @@ class MyPage extends GetView<PostsController> {
                     ActionIconButton(
                       icon: Icons.add_box_outlined,
                       onPressed: () {
-                        Get.to(() => WritePostPage());
+                        // Get.to(() => WritePostPage());
+                        WriteBottomSheet.writeBottomSheet(context);
                       },
                     ),
                     ActionIconButton(
