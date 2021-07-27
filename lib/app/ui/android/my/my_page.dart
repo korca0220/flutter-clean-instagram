@@ -78,7 +78,6 @@ class MyPage extends GetView<PostsController> {
                     ActionIconButton(
                       icon: Icons.add_box_outlined,
                       onPressed: () {
-                        // Get.to(() => WritePostPage());
                         WriteBottomSheet.writeBottomSheet(context);
                       },
                     ),

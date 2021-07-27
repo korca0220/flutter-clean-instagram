@@ -3,11 +3,11 @@ import 'package:flutter_clean_instagram/app/controller/detail/image_controller.d
 import 'package:flutter_clean_instagram/app/ui/android/detail/utils/uploadImage.dart';
 import 'package:get/get.dart';
 
-class Camera extends GetView<ImageController> {
+class Video extends GetView<ImageController> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    UploadImage.uploadImage('camera').then((value) {
+    UploadImage.uploadImage('video').then((value) {
       if (value != null)
         ImageController.to.setMultiImage(value);
       else
@@ -28,21 +28,26 @@ class Camera extends GetView<ImageController> {
               ),
             ),
             GetBuilder(
-              init: ImageController(),
-              builder: (_) {
-                print(_.multipleImages[0]["imageFile"]);
-                return Container(
-                  height: size.height * 0.5,
-                  width: double.infinity,
-                  child: _.multipleImages != null
-                      ? Image.file(
-                          _.multipleImages[0]["imageFile"],
-                          fit: BoxFit.cover,
-                        )
-                      : Container(),
-                );
-              },
-            ),
+                init: ImageController(),
+                builder: (_) {
+                  return Container(
+                    height: size.height * 0.5,
+                    child: GridView.count(
+                      crossAxisCount: 3,
+                      children: List.generate(
+                        _.multipleImages.length,
+                        (index) {
+                          return Container(
+                            child: Image.file(
+                              _.multipleImages[index]["imageFile"],
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                }),
           ],
         ),
       ),

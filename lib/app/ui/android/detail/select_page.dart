@@ -1,25 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_instagram/app/ui/android/detail/screens/camera.dart';
 import 'package:flutter_clean_instagram/app/ui/android/detail/screens/gallary.dart';
+import 'package:flutter_clean_instagram/app/ui/android/detail/screens/video.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class SelectPage extends StatefulWidget {
+  final int pageIndex;
+  const SelectPage({this.pageIndex = 0});
+
   @override
   _SelectPageState createState() => _SelectPageState();
 }
 
 class _SelectPageState extends State<SelectPage> {
-  int _currentIndex = 0;
-  PersistentTabController _tabController =
-      PersistentTabController(initialIndex: 0);
+  int initialIndex;
+  PersistentTabController _tabController;
 
   List<Widget> screens = [
     Gallary(),
     Camera(),
-    Center(
-      child: Text('동영상'),
-    ),
+    Video(),
   ];
+
+  @override
+  void initState() {
+    initialIndex = widget.pageIndex;
+    _tabController = PersistentTabController(initialIndex: initialIndex);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
